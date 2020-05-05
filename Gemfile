@@ -70,5 +70,8 @@ gem 'devise'
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 #Implementing Faker
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
 #The administration framework for Ruby on Rails applications. https://activeadmin.info
 gem 'activeadmin'
+gem 'activeadmin_addons'
+gem 'thor', '~> 0.19.1'

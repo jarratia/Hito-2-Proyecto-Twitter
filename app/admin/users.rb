@@ -5,10 +5,19 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at, :active
+  
+  index do
+    selectable_column
+    id_column
+    column :email
+    column :created_at
+    toggle_bool_column :active, if: proc { |user| user.active }
+    actions
+  end
+
   
   # or
-  
   # permit_params do
   #   permitted = [:email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
