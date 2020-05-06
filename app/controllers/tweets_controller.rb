@@ -26,7 +26,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    @tweet = current_user.tweets.build
+    @tweet = current_user.tweets
   end
 
   # GET /tweets/1/edit
@@ -55,6 +55,11 @@ class TweetsController < ApplicationController
       redirect_to root_path, notice: 'Your Retweet was successfully published.'
      end
   end
+
+  def profile_picture
+    @tweet = current_user.profile_picture
+  end
+  
 
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
@@ -88,6 +93,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :likes, :retweets)
+      params.require(:tweet).permit(:content, :likes, :retweets, :user_id)
     end
 end
