@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_022109) do
+ActiveRecord::Schema.define(version: 2020_05_07_104126) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 2020_05_03_022109) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
@@ -55,6 +61,13 @@ ActiveRecord::Schema.define(version: 2020_05_03_022109) do
     t.datetime "updated_at", null: false
     t.integer "retweets"
     t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
+
+  create_table "tweets_tags", id: false, force: :cascade do |t|
+    t.integer "Tweet_id"
+    t.integer "Tag_id"
+    t.index ["Tag_id"], name: "index_tweets_tags_on_Tag_id"
+    t.index ["Tweet_id"], name: "index_tweets_tags_on_Tweet_id"
   end
 
 # Could not dump table "users" because of following StandardError
