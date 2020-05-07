@@ -24,6 +24,12 @@ class TweetsController < ApplicationController
   def show
   end
 
+  def hashtags
+    tag = Tag.find_by(name: params[:name])
+    @tweet = tag.tweets
+  end
+  
+
   # GET /tweets/new
   def new
     @tweet = current_user.tweets.build
@@ -93,6 +99,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :likes, :retweets, :user_id)
+      params.require(:tweet).permit(:content, :likes, :retweets, :user_id, :tweets_tag)
     end
 end

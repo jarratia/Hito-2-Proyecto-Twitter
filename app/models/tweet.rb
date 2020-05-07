@@ -8,8 +8,23 @@ class Tweet < ApplicationRecord
 
   scope :content, -> (content) { where("content LIKE ?", "%#{content}%") }
 
-  # def to_s
-  #   name
-  # end
+  after_create do
+    tweet = Tweet.find_by(id: self.id)
+    hashtags = self.content.scan(/#\w+/)
+    hashtags.uniq.map do |hashtag|
+      tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      tweet.tags << tag
+    end
+  end
+
+  before_update do
+    tweet = Tweet.find_by(id: self.id)
+    tweet.tags.clear
+    hashtags = self.content.scan(/#\w+/)
+    hashtags.uniq.map do |hashtag|
+      tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      tweet.tags << tag
+    end
+  end
 
 end
