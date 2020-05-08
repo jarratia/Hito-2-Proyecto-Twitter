@@ -8,6 +8,15 @@ Rails.application.routes.draw do
     resources :likes
   end
   
+  
+	
+  namespace :api do
+    resources :news, only: [:index, :create, :destroy, :update, :show]
+    resources :dates, only: [:date]
+  end
+
+  get '/api/:date1/:date2', to: 'tweets#date', as: "date"
+
   get '/tweets/:id/retweets', to: 'tweets#retweets', as: 'retweets'
   get '/tweets/hashtag/:name', to: 'tweets#hashtags', as: 'hashtags'
 

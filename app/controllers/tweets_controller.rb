@@ -28,6 +28,12 @@ class TweetsController < ApplicationController
     tag = Tag.find_by(name: params[:name])
     @tweet = tag.tweets
   end
+
+  def date
+    @tweets = Tweet.where("updated_at <= ? AND updated_at >= ?", params[:date1], params[:date2])
+
+    render json:@tweets.all
+  end  
   
 
   # GET /tweets/new
