@@ -13,7 +13,7 @@
   <table class="table table-striped">
 
     <tbody class="card">
-      <% @tweets.each do |tweet| %>
+      <% @tweets.each do |tweet| %>  
       <tr>        
         <td><p><%= tweet.user %></p></td>
         <td><%= render_with_hashtags(tweet.content) %></td>

@@ -13,9 +13,14 @@ ActiveAdmin.register User do
     column :email
     column :created_at
     toggle_bool_column :active, if: proc { |user| user.active }
+    column :tweets
+    column :likes
     actions
   end
 
+  member_action :tweets, method: :put do
+    resource.tweets.count
+  end
   
   # or
   # permit_params do

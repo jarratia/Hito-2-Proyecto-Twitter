@@ -11,6 +11,12 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all.page(params[:page]).per(25).order(created_at: :desc)
   end
 
+  def date
+    @tweets = Tweet.where("updated_at <= ? AND updated_at >= ?", params[:date1], params[:date2])
+
+    render json: @tweets
+  end  
+
   def search
     if params.has_key?(:content)
     @tweets = Tweet.content(params[:content])
@@ -21,20 +27,14 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1
   # GET /tweets/1.json
-  def show
-  end
+  # def show
+    
+  # end 
 
   def hashtags
     tag = Tag.find_by(name: params[:name])
     @tweet = tag.tweets
-  end
-
-  def date
-    @tweets = Tweet.where("updated_at <= ? AND updated_at >= ?", params[:date1], params[:date2])
-
-    render json:@tweets.all
   end  
-  
 
   # GET /tweets/new
   def new
@@ -70,8 +70,7 @@ class TweetsController < ApplicationController
 
   def profile_picture
     @tweet = current_user.profile_picture
-  end
-  
+  end  
 
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
@@ -105,6 +104,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :likes, :retweets, :user_id, :tweets_tag)
+      params.require(:tweet).permit(:content, :likes, :retweets, :user_id)
     end
 end

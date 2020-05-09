@@ -6,23 +6,17 @@
 </p>
 
 <p>
-  <strong>Likes:</strong>
-  <%= @tweet.likes %>
-  <%= button_to 'Like', tweet_likes_path(@tweet), method: :post %>
-</p>
-
-<p>
   <%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%>
 </p>
 
 <p>
   <strong>Retweets:</strong>
-  <%#= @tweet.retweet %>
+  <%= @tweet.retweets %> <%= (@tweet.retweets) == 1 ? 'Retweet' : 'Retweets'%>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @tweet.user %>
+  <%= current_user %>
 </p>
 
 <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
