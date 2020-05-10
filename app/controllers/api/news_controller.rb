@@ -1,7 +1,16 @@
 class Api::NewsController < ApplicationController
+    
     def index
-        @news = User.all.order(created_at: :desc)
-        render json: @news
+        tweets = Tweet.all.order(created_at: :desc)
+        @tweets = tweets.map {|tweet| { 
+            id: tweet.id, 
+            content: tweet.content, 
+            user: tweet.user_id,  
+            like_count: tweet.likes.count,
+            retweets: tweet.retweets, 
+            rewtitter_from: tweet.user_id
+            }}
+        render json: @tweets
     end
      
     def show

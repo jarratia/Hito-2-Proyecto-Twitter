@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 	
   namespace :api do
     resources :news, only: [:index, :create, :destroy, :update, :show]
-    resources :dates, only: [:date]
+    resources :date, only: [:date, :create, :destroy, :update, :show]
   end
 
-  get '/api/:date1/:date2', to: 'tweets#date', as: "date"
+  get '/tweets/api/:date1/:date2', to: 'tweets#date', as: "date"
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

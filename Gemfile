@@ -77,3 +77,5 @@ gem 'activeadmin_addons'
 gem 'thor', '~> 0.19.1'
 
 gem 'dotenv-rails'
+
+gem 'httparty', '~> 0.13.7'

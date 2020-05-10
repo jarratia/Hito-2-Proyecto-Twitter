@@ -12,8 +12,8 @@ class TweetsController < ApplicationController
   end
 
   def date
-    @tweets = Tweet.where("updated_at <= ? AND updated_at >= ?", params[:date1], params[:date2])
-
+    tweets = Tweet.all.order(created_at: :desc)
+    @tweets = tweets.map { |tweet| {created_at: tweet.created_at} }
     render json: @tweets
   end  
 
