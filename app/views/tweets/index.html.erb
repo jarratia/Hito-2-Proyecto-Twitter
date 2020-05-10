@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Tweets</h1>
-
 <%= form_tag tweets_search_path, :method => 'get', class:"form-inline my-4"  do %>
   <p>
     <%= text_field_tag :content, params[:content], class:"form-control mr-sm-2" %>
@@ -16,7 +14,12 @@
       <% @tweets.each do |tweet| %>
       <tr>        
         <td><p><%= tweet.user %></p></td>
-        <td><%= render_with_hashtags(tweet.content) %></td>
+        <td>
+          <%= render_with_hashtags(tweet.content) %> 
+          <p>
+            <%= link_to time_ago_in_words(tweet.created_at), tweet%>
+          </p>
+        </td>
         <td><p><%= link_to pluralize(tweet.likes.count, 'Like' ), tweet_likes_path(tweet), method: :post %></p></td>
         <td><%= link_to '', retweets_path(tweet), :class => "fas fa-retweet" %></td>        
       </tr>
@@ -30,6 +33,6 @@
   <%= paginate @tweets %>
   </div>
 </div>
-
+  
   <%= link_to 'New Tweet', new_tweet_path, :class => "btn btn-success" %>
 
