@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at, :active
+  permit_params :email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at, :active, :tweets, :likes
   
   index do
     selectable_column
@@ -13,15 +13,15 @@ ActiveAdmin.register User do
     column :email
     column :created_at
     toggle_bool_column :active, if: proc { |user| user.active }
-    column :tweets
-    column :likes
+    column :tweets do |tweet|
+      tweet.tweets.count
+    end
+    column :likes do |like|
+      like.likes.count
+    end
     actions
   end
 
-  member_action :tweets, method: :put do
-    resource.tweets.count
-  end
-  
   # or
   # permit_params do
   #   permitted = [:email, :encrypted_password, :name, :profile_picture, :reset_password_token, :reset_password_sent_at, :remember_created_at]
