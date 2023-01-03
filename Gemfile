@@ -78,4 +78,4 @@ gem 'thor', '~> 0.19.1'
 
 gem 'dotenv-rails'
 
-gem 'httparty', '~> 0.13.7'
+gem 'httparty', '~> 0.21.0'
